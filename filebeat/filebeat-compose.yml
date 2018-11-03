@@ -1,0 +1,13 @@
+version: '2'
+services:
+  filebeat:
+    build:
+      context: filebeat/
+      args: $ELK_VERSION
+    volume:
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /var/lib/docker/containers:/var/lib/docker/containers
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
